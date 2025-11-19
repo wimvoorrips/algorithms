@@ -1,2 +1,9 @@
-package algorithms;public class Stack {
+package algorithms.stack;
+
+public class Stack {
+    private
+    Stack(){
+
+    }
+
 }

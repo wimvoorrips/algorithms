@@ -1,2 +1,9 @@
-package PACKAGE_NAME;public class firsttest {
+import org.junit.Assert;
+import org.junit.Test;
+
+public class firsttest {
+    @Test
+    public void firstTest() {
+        Assert.assertTrue(true);
+    }
 }
