@@ -3,6 +3,8 @@ package algorithms.linkedlist;
 
 import org.junit.Test;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LinkedListOneDirectionTest {
@@ -116,5 +118,53 @@ public class LinkedListOneDirectionTest {
         int foundData = linkedListOneDirection.get(5000);
         int expectedData = -50;
         assertEquals(expectedData, foundData);
+    }
+
+    @Test
+    public void testSettingGettingTooLow(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            linkedListOneDirection.get(-100);
+        });
+
+        String expectedMessage = "\"segmentBeforeIndex\" is null";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testSettingGettingTooHigh(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            linkedListOneDirection.get(100000);
+        });
+
+        String expectedMessage = "\"segmentBeforeIndex\" is null";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testGetHeader(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            linkedListOneDirection.get(-1);
+        });
+
+        String expectedMessage = "\"segmentBeforeIndex\" is null";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }

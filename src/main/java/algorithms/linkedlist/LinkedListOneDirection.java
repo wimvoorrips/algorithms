@@ -1,9 +1,9 @@
 package algorithms.linkedlist;
 
 public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
-    ISegmentOneDirection<T> head;
+    protected ISegmentOneDirection<T> head;
 
-    LinkedListOneDirection(){
+    public LinkedListOneDirection(){
         head = new SegmentOneDirection<T>(null);
     }
 
@@ -13,13 +13,18 @@ public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
      */
     @Override
     public void add(T data) {
-        ISegmentOneDirection<T> segment = head;
-        while(segment.getNextSegment() != null){
-            segment = segment.getNextSegment();
-        }
+        ISegmentOneDirection<T> lastSegment = walkToLastElement();
+        ISegmentOneDirection<T> newSegment = new SegmentOneDirection<T>(data);
+        lastSegment.setNextSegment(newSegment);
+    }
+
+    public void add(T data, int index) {
+        ISegmentOneDirection<T> segmentBeforeIndex = getPreviousSegment(index);
+        ISegmentOneDirection<T> segmentAfterIndex = segmentBeforeIndex.getNextSegment();
 
         ISegmentOneDirection<T> newSegment = new SegmentOneDirection<T>(data);
-        segment.setNextSegment(newSegment);
+        segmentBeforeIndex.setNextSegment(newSegment);
+        newSegment.setNextSegment(segmentAfterIndex);
     }
 
     /**
@@ -91,11 +96,22 @@ public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
     }
 
     private ISegmentOneDirection<T> getPreviousSegment(int index){
-        ISegmentOneDirection<T> segmentBeforeIndex = head;
+        if(index < 0){
+            return null;
+        }
 
+        ISegmentOneDirection<T> segmentBeforeIndex = head;
         for(int counter = 0; counter < index; counter++){
             segmentBeforeIndex = segmentBeforeIndex.getNextSegment();
         }
         return segmentBeforeIndex;
+    }
+
+    protected ISegmentOneDirection<T> walkToLastElement(){
+        ISegmentOneDirection<T> segment = head;
+        while(segment.getNextSegment() != null){
+            segment = segment.getNextSegment();
+        }
+        return segment;
     }
 }

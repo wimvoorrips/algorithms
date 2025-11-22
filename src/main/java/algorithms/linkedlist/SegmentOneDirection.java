@@ -4,7 +4,7 @@ public class SegmentOneDirection <T> implements ISegmentOneDirection<T>{
     T segmentData;
     ISegmentOneDirection<T> nextSegment;
 
-    SegmentOneDirection(T segmentData){
+    public SegmentOneDirection(T segmentData){
         this.segmentData = segmentData;
     }
 
