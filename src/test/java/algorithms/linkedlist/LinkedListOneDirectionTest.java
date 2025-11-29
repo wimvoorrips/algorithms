@@ -10,6 +10,28 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LinkedListOneDirectionTest {
 
     @Test
+    public void simpleTest1(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10; i++){
+            linkedListOneDirection.add(i);
+        }
+        int result = linkedListOneDirection.get(0);
+        int expected = 0;
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void simpleTest2(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10; i++){
+            linkedListOneDirection.add(i);
+        }
+        int result = linkedListOneDirection.get(9);
+        int expected = 9;
+        assertEquals(expected, result);
+    }
+
+    @Test
     public void fillingGettingLinkedList1(){
         ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
         for(int i = 0; i < 10000; i++){
