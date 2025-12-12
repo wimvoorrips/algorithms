@@ -3,6 +3,8 @@ package algorithms.linkedlist;
 
 import org.junit.Test;
 
+import java.util.function.Predicate;
+
 import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -96,6 +98,19 @@ public class LinkedListOneDirectionTest {
         }
 
         int foundLocation = linkedListOneDirection.find(9999);
+        int expectedLocation = 9999;
+        assertEquals(expectedLocation, foundLocation);
+    }
+
+    @Test
+    public void testFillingFindingLinkedList4(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        Predicate<Integer> tostringtest = item -> (item.toString().equals("9999")); //= new String("9999");
+        int foundLocation = linkedListOneDirection.find(tostringtest);
         int expectedLocation = 9999;
         assertEquals(expectedLocation, foundLocation);
     }

@@ -1,5 +1,7 @@
 package algorithms.linkedlist;
 
+import java.util.function.Predicate;
+
 public interface ILinkedListOneDirection <T> {
     void add(T data);
     void add(T data, int index);
@@ -7,5 +9,6 @@ public interface ILinkedListOneDirection <T> {
     T get(int index);
     T remove(int index);
     int find(T data);
+    int find(Predicate<T> condition);
 
 }

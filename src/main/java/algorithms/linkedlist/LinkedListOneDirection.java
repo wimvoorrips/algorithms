@@ -1,5 +1,7 @@
 package algorithms.linkedlist;
 
+import java.util.function.Predicate;
+
 public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
     protected ISegmentOneDirection<T> head;
 
@@ -82,6 +84,25 @@ public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
             currentSegmentNumber += 1;
             segment = segment.getNextSegment();
             if(segment.getData().equals(data)){
+                return currentSegmentNumber;
+            };
+        }
+        return -1;
+    }
+
+    /**
+     * find based on condition
+     * @param condition
+     * @return
+     */
+    public int find(Predicate<T> condition){
+        int currentSegmentNumber = -1;
+        ISegmentOneDirection<T> segment = head;
+
+        while(segment.getNextSegment() != null){
+            currentSegmentNumber += 1;
+            segment = segment.getNextSegment();
+            if(condition.test(segment.getData())){
                 return currentSegmentNumber;
             };
         }
