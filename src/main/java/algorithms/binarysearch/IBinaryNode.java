@@ -8,4 +8,6 @@ public interface IBinaryNode<T extends Comparable<T>> {
     T find (T data);
     T findMax();
     T findMin();
+
+    T getValue();
 }
