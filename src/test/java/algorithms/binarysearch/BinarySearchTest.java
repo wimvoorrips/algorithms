@@ -220,13 +220,13 @@ public class BinarySearchTest {
     }
 
     @Test
-    public void removeFindTest1(){
+    public void removeFindLeafTest1(){
         IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
         binaryNode.add(10);
         binaryNode.add(5);
         binaryNode.add(15);
 
-        binaryNode.remove(15);
+        binaryNode = binaryNode.remove(15);
 
         Integer expected = null;
         Integer result = binaryNode.find(15);
@@ -235,16 +235,448 @@ public class BinarySearchTest {
     }
 
     @Test
-    public void removeFindTest2(){
+    public void removeFindRightChildTest1(){
         IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
-        binaryNode.add(10);
         binaryNode.add(5);
+        binaryNode.add(10);
         binaryNode.add(15);
 
-        binaryNode.remove(10);
+        binaryNode = binaryNode.remove(10);
 
-        Integer expected = 15;
-        Integer result = binaryNode.find(15);
+        Integer expected = null;
+        Integer result = binaryNode.find(10);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeFindLeftChildTest1(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(15);
+        binaryNode.add(10);
+        binaryNode.add(5);
+
+        binaryNode = binaryNode.remove(10);
+
+        Integer expected = null;
+        Integer result = binaryNode.find(10);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeDepthRightChildTest1(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(5);
+        binaryNode.add(10);
+        binaryNode.add(15);
+
+        binaryNode = binaryNode.remove(10);
+
+        Integer expected = 1;
+        Integer result = binaryNode.getDepth(15);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeDepthLeftChildTest1(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(15);
+        binaryNode.add(10);
+        binaryNode.add(5);
+
+        binaryNode = binaryNode.remove(10);
+
+        Integer expected = 1;
+        Integer result = binaryNode.getDepth(5);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeFindTwoChildrenNoRootTest(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(16);
+        binaryNode.add(8);
+        binaryNode.add(24);
+
+        binaryNode.add(4);
+        binaryNode.add(2);
+        binaryNode.add(1);
+        binaryNode.add(3);
+        binaryNode.add(6);
+        binaryNode.add(5);
+        binaryNode.add(7);
+
+        binaryNode.add(12);
+        binaryNode.add(10);
+        binaryNode.add(9);
+        binaryNode.add(11);
+        binaryNode.add(14);
+        binaryNode.add(13);
+        binaryNode.add(15);
+
+        binaryNode.add(20);
+        binaryNode.add(18);
+        binaryNode.add(17);
+        binaryNode.add(19);
+        binaryNode.add(22);
+        binaryNode.add(21);
+        binaryNode.add(23);
+
+        binaryNode.add(28);
+        binaryNode.add(26);
+        binaryNode.add(25);
+        binaryNode.add(27);
+        binaryNode.add(30);
+        binaryNode.add(29);
+        binaryNode.add(31);
+
+        binaryNode = binaryNode.remove(24);
+
+        Integer expected = null;
+        Integer result = binaryNode.find(24);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeDepthTwoChildrenNoRootTest1(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(16);
+        binaryNode.add(8);
+        binaryNode.add(24);
+
+        binaryNode.add(4);
+        binaryNode.add(2);
+        binaryNode.add(1);
+        binaryNode.add(3);
+        binaryNode.add(6);
+        binaryNode.add(5);
+        binaryNode.add(7);
+
+        binaryNode.add(12);
+        binaryNode.add(10);
+        binaryNode.add(9);
+        binaryNode.add(11);
+        binaryNode.add(14);
+        binaryNode.add(13);
+        binaryNode.add(15);
+
+        binaryNode.add(20);
+        binaryNode.add(18);
+        binaryNode.add(17);
+        binaryNode.add(19);
+        binaryNode.add(22);
+        binaryNode.add(21);
+        binaryNode.add(23);
+
+        binaryNode.add(28);
+        binaryNode.add(26);
+        binaryNode.add(25);
+        binaryNode.add(27);
+        binaryNode.add(30);
+        binaryNode.add(29);
+        binaryNode.add(31);
+
+        binaryNode = binaryNode.remove(24);
+
+        Integer expected = 2;
+        Integer result = binaryNode.getDepth(20);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeDepthTwoChildrenNoRootTest2(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(16);
+        binaryNode.add(8);
+        binaryNode.add(24);
+
+        binaryNode.add(4);
+        binaryNode.add(2);
+        binaryNode.add(1);
+        binaryNode.add(3);
+        binaryNode.add(6);
+        binaryNode.add(5);
+        binaryNode.add(7);
+
+        binaryNode.add(12);
+        binaryNode.add(10);
+        binaryNode.add(9);
+        binaryNode.add(11);
+        binaryNode.add(14);
+        binaryNode.add(13);
+        binaryNode.add(15);
+
+        binaryNode.add(20);
+        binaryNode.add(18);
+        binaryNode.add(17);
+        binaryNode.add(19);
+        binaryNode.add(22);
+        binaryNode.add(21);
+        binaryNode.add(23);
+
+        binaryNode.add(28);
+        binaryNode.add(26);
+        binaryNode.add(25);
+        binaryNode.add(27);
+        binaryNode.add(30);
+        binaryNode.add(29);
+        binaryNode.add(31);
+
+        //max van left child moet hierdoor de nieuwe depth 1 sjaak worden
+        binaryNode = binaryNode.remove(24);
+
+        Integer expected = 1;
+        Integer result = binaryNode.getDepth(23);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeFindTwoChildrenYesRootTest(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(16);
+        binaryNode.add(8);
+        binaryNode.add(24);
+
+        binaryNode.add(4);
+        binaryNode.add(2);
+        binaryNode.add(1);
+        binaryNode.add(3);
+        binaryNode.add(6);
+        binaryNode.add(5);
+        binaryNode.add(7);
+
+        binaryNode.add(12);
+        binaryNode.add(10);
+        binaryNode.add(9);
+        binaryNode.add(11);
+        binaryNode.add(14);
+        binaryNode.add(13);
+        binaryNode.add(15);
+
+        binaryNode.add(20);
+        binaryNode.add(18);
+        binaryNode.add(17);
+        binaryNode.add(19);
+        binaryNode.add(22);
+        binaryNode.add(21);
+        binaryNode.add(23);
+
+        binaryNode.add(28);
+        binaryNode.add(26);
+        binaryNode.add(25);
+        binaryNode.add(27);
+        binaryNode.add(30);
+        binaryNode.add(29);
+        binaryNode.add(31);
+
+        binaryNode = binaryNode.remove(16);
+
+        Integer expected = null;
+        Integer result = binaryNode.find(16);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeFindTwoChildrenMaxChildParentDeletedTest1(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(16);
+        binaryNode.add(8);
+        binaryNode.add(24);
+
+        binaryNode.add(4);
+        binaryNode.add(2);
+        binaryNode.add(1);
+        binaryNode.add(3);
+        binaryNode.add(6);
+        binaryNode.add(5);
+        binaryNode.add(7);
+
+        binaryNode.add(12);
+        binaryNode.add(10);
+        binaryNode.add(9);
+        binaryNode.add(11);
+        binaryNode.add(14);
+        binaryNode.add(13);
+        binaryNode.add(15);
+
+        binaryNode.add(20);
+        binaryNode.add(18);
+        binaryNode.add(17);
+        binaryNode.add(19);
+        binaryNode.add(22);
+        binaryNode.add(21);
+        binaryNode.add(23);
+
+        binaryNode.add(31);
+
+        binaryNode.add(28);
+        binaryNode.add(26);
+        binaryNode.add(25);
+        binaryNode.add(27);
+        binaryNode.add(30);
+        binaryNode.add(29);
+
+
+        binaryNode = binaryNode.remove(24);
+
+        Integer expected = null;
+        Integer result = binaryNode.find(24);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeFindTwoChildrenMaxChildParentDeletedTest2(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(16);
+        binaryNode.add(8);
+        binaryNode.add(24);
+
+        binaryNode.add(4);
+        binaryNode.add(2);
+        binaryNode.add(1);
+        binaryNode.add(3);
+        binaryNode.add(6);
+        binaryNode.add(5);
+        binaryNode.add(7);
+
+        binaryNode.add(12);
+        binaryNode.add(10);
+        binaryNode.add(9);
+        binaryNode.add(11);
+        binaryNode.add(14);
+        binaryNode.add(13);
+        binaryNode.add(15);
+
+        binaryNode.add(20);
+        binaryNode.add(18);
+        binaryNode.add(17);
+        binaryNode.add(19);
+        binaryNode.add(22);
+        binaryNode.add(21);
+        binaryNode.add(23);
+
+        binaryNode.add(31);
+
+        binaryNode.add(28);
+        binaryNode.add(26);
+        binaryNode.add(25);
+        binaryNode.add(27);
+        binaryNode.add(30);
+        binaryNode.add(29);
+
+
+        binaryNode = binaryNode.remove(24);
+
+        Integer expected = 28;
+        Integer result = binaryNode.find(28);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeDepthTwoChildrenMaxChildParentDeletedTest1(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(16);
+        binaryNode.add(8);
+        binaryNode.add(24);
+
+        binaryNode.add(4);
+        binaryNode.add(2);
+        binaryNode.add(1);
+        binaryNode.add(3);
+        binaryNode.add(6);
+        binaryNode.add(5);
+        binaryNode.add(7);
+
+        binaryNode.add(12);
+        binaryNode.add(10);
+        binaryNode.add(9);
+        binaryNode.add(11);
+        binaryNode.add(14);
+        binaryNode.add(13);
+        binaryNode.add(15);
+
+        binaryNode.add(23);
+
+        binaryNode.add(20);
+        binaryNode.add(18);
+        binaryNode.add(17);
+        binaryNode.add(19);
+        binaryNode.add(22);
+        binaryNode.add(21);
+
+        binaryNode.add(28);
+        binaryNode.add(26);
+        binaryNode.add(25);
+        binaryNode.add(27);
+        binaryNode.add(30);
+        binaryNode.add(29);
+        binaryNode.add(31);
+
+
+        binaryNode = binaryNode.remove(24);
+
+        Integer expected = 1;
+        Integer result = binaryNode.getDepth(23);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeDepthTwoChildrenMaxChildParentDeletedTest2(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(16);
+        binaryNode.add(8);
+        binaryNode.add(24);
+
+        binaryNode.add(4);
+        binaryNode.add(2);
+        binaryNode.add(1);
+        binaryNode.add(3);
+        binaryNode.add(6);
+        binaryNode.add(5);
+        binaryNode.add(7);
+
+        binaryNode.add(12);
+        binaryNode.add(10);
+        binaryNode.add(9);
+        binaryNode.add(11);
+        binaryNode.add(14);
+        binaryNode.add(13);
+        binaryNode.add(15);
+
+        binaryNode.add(23);
+
+        binaryNode.add(20);
+        binaryNode.add(18);
+        binaryNode.add(17);
+        binaryNode.add(19);
+        binaryNode.add(22);
+        binaryNode.add(21);
+
+        binaryNode.add(28);
+        binaryNode.add(26);
+        binaryNode.add(25);
+        binaryNode.add(27);
+        binaryNode.add(30);
+        binaryNode.add(29);
+        binaryNode.add(31);
+
+
+        binaryNode = binaryNode.remove(24);
+
+        Integer expected = 3;
+        Integer result = binaryNode.getDepth(18);
+        System.out.println(binaryNode.findNode(18).getParent().getValue());
+        System.out.println(binaryNode.findNode(18).getParent().getParent().getValue());
 
         assertEquals(expected, result);
     }

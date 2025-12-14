@@ -110,7 +110,7 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
                 return actualChild;
             }
 
-            if(parent.getChild(-1).equals(nodeToBeDeleted)) {
+            if(parent.getChild(-1) != null && parent.getChild(-1).equals(nodeToBeDeleted)) {
                 parent.setLeft(actualChild);
             }
             else{
@@ -125,6 +125,55 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
             return this;
         }
 
+        // situation 3, node to be deleted has 2 children
+
+        // fuck it, even alles apart schrijven
+        // case 1: deletedNode is NIET root en is NIET de parent van de max node
+        IBinaryNode<T> maxNodeOnLeft = leftChild.findMaxNode();
+        IBinaryNode<T> maxNodeOnLeftParent = maxNodeOnLeft.getParent();
+        IBinaryNode<T> maxNodeOnLeftChild = maxNodeOnLeft.getChild(-1);
+
+        // parent en child aan elkaar plakken
+        maxNodeOnLeftParent.setRight(maxNodeOnLeftChild);
+        if(maxNodeOnLeftChild != null) {
+            maxNodeOnLeftChild.setParent(maxNodeOnLeftParent);
+        }
+
+        // nu de maxnode op de plek van de deletednode plaatsen
+        if(! maxNodeOnLeft.equals(leftChild)) {
+            maxNodeOnLeft.setLeft(leftChild);
+            leftChild.setParent(maxNodeOnLeft);
+        } else {
+            maxNodeOnLeft
+        }
+        maxNodeOnLeft.setRight(rightChild);
+        rightChild.setParent(maxNodeOnLeft);
+
+        maxNodeOnLeft.setParent(parent);
+        if(parent != null) {
+            if (nodeToBeDeleted.equals(parent.getChild(-1))) {
+                parent.setLeft(maxNodeOnLeft);
+            } else {
+                parent.setRight(maxNodeOnLeft);
+            }
+        }
+
+        // en als laatste de references van de deleted node verwijderen
+        nodeToBeDeleted.setParent(null);
+        nodeToBeDeleted.setLeft(null);
+        nodeToBeDeleted.setRight(null);
+
+        if(this.equals(nodeToBeDeleted)){
+            return maxNodeOnLeft;
+        }
+        return this;
+
+
+
+
+
+
+        // situation 3, node to be deleted has 2 children
 
 
         // get max from left, and put it at the deleted spot
@@ -133,15 +182,60 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
         // attach max as the left child of the parent of deleted
         // attach children of deleted to max
         // that should make sense in some way
+        /*
+                      P
+              O               D
+          A       B        M       C
+        E   F   G    H   I       K    L
+        */
+
+        // Laten we er een boodschappenlijstje van maken
+        // deleted node hebben we
+        // parent hebben we
+
+        // case 1: deletednode is root
+        // in dit geval halen we leftmax op, gooien we deze op de plek van root, en attachen we de children
+        // niet anders dan normaal eigenlijk
 
 
 
-        IBinaryNode<T> nodeLeftMax = this.left.findMaxNode();
 
+
+
+
+    /*
+        //so first we find the max child on the left side of the nodetobedeleted
+        IBinaryNode<T> nodeLeftMax = nodeToBeDeleted.getChild(-1).findMaxNode();
+
+        // then we connect the child of the max node to the parent of the max node
         IBinaryNode<T> parentOfNodeLeftMax = nodeLeftMax.getParent();
-        if(parentOfNodeLeftMax.equals(nodeToBeDeleted)){
-            parentOfNodeLeftMax = parent;
+        IBinaryNode<T> childOfNodeLeftMax = nodeLeftMax.getChild(-1);
+        if(childOfNodeLeftMax != null) {
+            // if parent of max got deleted
+            if (parentOfNodeLeftMax.equals(nodeToBeDeleted)) {
+                parentOfNodeLeftMax = parent;
+                // nu kan het voo
+            }
+
+            if(parentOfNodeLeftMax != null) {
+                parentOfNodeLeftMax.setRight(childOfNodeLeftMax);
+                childOfNodeLeftMax.setParent(parentOfNodeLeftMax);
+
+            }
+
+            // nu de standaard dingen
+            //nodeLeftMax.setLeft(null);
+            nodeLeftMax.setRight(nodeToBeDeleted.getChild(1));
+            nodeLeftMax.setLeft(nodeToBeDeleted.getChild(-1));
+
+
+
         }
+
+        ////
+
+
+        // then we put
 
 
         IBinaryNode<T> childOfNodeLeftMax = nodeLeftMax.getChild(-1);
@@ -149,7 +243,7 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
         parentOfNodeLeftMax.remove(nodeToBeDeleted.getValue());
         parentOfNodeLeftMax.add(childOfNodeLeftMax);
 
-        return this;
+        return this;*/
     }
 
     /**
@@ -252,6 +346,9 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
     }
 
     public void setParent(IBinaryNode<T> parent){
+        if(this.equals(parent)){
+            throw new RuntimeException("Can't set self as parent");
+        }
         this.parent = parent;
     }
 
@@ -267,10 +364,16 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
     }
 
     public void setLeft(IBinaryNode<T> left) {
+        if(this.equals(left)){
+            throw new RuntimeException("Can't set self as child");
+        }
         this.left = left;
     }
 
     public void setRight(IBinaryNode<T> right){
+        if(this.equals(right)){
+            throw new RuntimeException("Can't set self as child");
+        }
         this.right = right;
     }
 
