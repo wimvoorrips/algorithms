@@ -4,7 +4,7 @@ import algorithms.hashtable.HashTable;
 import algorithms.hashtable.IHashTable;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class BinarySearchTest {
 
@@ -46,12 +46,15 @@ public class BinarySearchTest {
     public void addNullTest(){
         IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
         binaryNode.add(1);
-        binaryNode.add((Integer) null);
 
-        Integer expected = 1;
-        Integer result = binaryNode.find(1);
 
-        assertEquals(expected, result);
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            binaryNode.add((Integer) null);
+        });
+
+        String expectedMessage = "null not allowed";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test

@@ -11,4 +11,6 @@ public interface ILinkedListOneDirection <T> {
     int find(T data);
     int find(Predicate<T> condition);
 
+    int getLength();
+
 }

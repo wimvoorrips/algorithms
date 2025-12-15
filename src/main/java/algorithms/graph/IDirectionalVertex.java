@@ -2,10 +2,12 @@ package algorithms.graph;
 
 import algorithms.linkedlist.ILinkedListOneDirection;
 
-public interface IDirectionalVertex {
-    int getId();
+import java.util.function.Predicate;
 
-    void addEdge();
-    void removeEdge();
-    ILinkedListOneDirection getEdges();
+public interface IDirectionalVertex<T> {
+
+    T getData();
+    void addEdge(IDirectionalVertex<T> targetVertex, int weight);
+    void removeEdge(Predicate<IWeightedDirectionalEdge<T>> condition);
+    ILinkedListOneDirection<IWeightedDirectionalEdge<T>> getEdges();
 }

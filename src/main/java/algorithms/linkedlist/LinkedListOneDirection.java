@@ -53,6 +53,9 @@ public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
     @Override
     public T get(int index) {
         ISegmentOneDirection<T> segmentBeforeIndex = getPreviousSegment(index);
+        if(segmentBeforeIndex == null){
+            return null;
+        }
         return segmentBeforeIndex.getNextSegment().getData();
     }
 
@@ -123,6 +126,10 @@ public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
 
         ISegmentOneDirection<T> segmentBeforeIndex = head;
         for(int counter = 0; counter < index; counter++){
+            if(segmentBeforeIndex == null){
+                return null;
+                //throw new RuntimeException("index does not exist");
+            }
             segmentBeforeIndex = segmentBeforeIndex.getNextSegment();
         }
         return segmentBeforeIndex;
@@ -134,5 +141,18 @@ public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
             segment = segment.getNextSegment();
         }
         return segment;
+    }
+
+    @Override
+    public int getLength() {
+        int currentSegmentNumber = -1;
+        ISegmentOneDirection<T> segment = head;
+
+        while(segment.getNextSegment() != null){
+            currentSegmentNumber += 1;
+            segment = segment.getNextSegment();
+            ;
+        }
+        return currentSegmentNumber + 1;
     }
 }

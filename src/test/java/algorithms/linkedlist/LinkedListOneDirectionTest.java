@@ -67,6 +67,18 @@ public class LinkedListOneDirectionTest {
     }
 
     @Test
+    public void fillingGettingLinkedList4(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+        Integer result = linkedListOneDirection.get(100000);
+        Integer expected = null;
+        assertEquals(expected, result);
+    }
+
+
+    @Test
     public void testFillingFindingLinkedList1(){
         ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
         for(int i = 0; i < 10000; i++){
@@ -164,13 +176,9 @@ public class LinkedListOneDirectionTest {
             linkedListOneDirection.add(i);
         }
 
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            linkedListOneDirection.get(-100);
-        });
-
-        String expectedMessage = "\"segmentBeforeIndex\" is null";
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expectedMessage));
+        Integer foundData = linkedListOneDirection.get(-100);
+        Integer expectedData = null;
+        assertEquals(expectedData, foundData);
     }
 
     @Test
@@ -180,13 +188,9 @@ public class LinkedListOneDirectionTest {
             linkedListOneDirection.add(i);
         }
 
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            linkedListOneDirection.get(100000);
-        });
-
-        String expectedMessage = "\"segmentBeforeIndex\" is null";
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expectedMessage));
+        Integer foundData = linkedListOneDirection.get(100000);
+        Integer expectedData = null;
+        assertEquals(expectedData, foundData);
     }
 
     @Test
@@ -196,12 +200,40 @@ public class LinkedListOneDirectionTest {
             linkedListOneDirection.add(i);
         }
 
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            linkedListOneDirection.get(-1);
-        });
+        Integer foundData = linkedListOneDirection.get(-1);
+        Integer expectedData = null;
+        assertEquals(expectedData, foundData);
+    }
 
-        String expectedMessage = "\"segmentBeforeIndex\" is null";
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expectedMessage));
+    @Test
+    public void testGetLength1(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        linkedListOneDirection.add(1);
+
+
+        int foundData = linkedListOneDirection.getLength();
+        int expectedData = 1;
+        assertEquals(expectedData, foundData);
+    }
+
+    @Test
+    public void testGetLength2(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+
+        int foundData = linkedListOneDirection.getLength();
+        int expectedData = 0;
+        assertEquals(expectedData, foundData);
+    }
+
+    @Test
+    public void testGetLength3(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        int foundData = linkedListOneDirection.getLength();
+        int expectedData = 10000;
+        assertEquals(expectedData, foundData);
     }
 }

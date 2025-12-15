@@ -16,6 +16,9 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
     @Override
     public IBinaryNode<T> add(T data) {
         //do we want to deal with duplicates?
+        if(data == null){
+            throw new RuntimeException("null not allowed");
+        }
 
 
         if(value == null){
