@@ -131,11 +131,24 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
         // case 1: deletedNode is NIET root en is NIET de parent van de max node
         IBinaryNode<T> maxNodeOnLeft = leftChild.findMaxNode();
         IBinaryNode<T> maxNodeOnLeftParent = maxNodeOnLeft.getParent();
+        //if(nodeToBeDeleted.equals(maxNodeOnLeftParent)){
+        //    maxNodeOnLeftParent = maxNodeOnLeftParent.getParent();
+        //}
         IBinaryNode<T> maxNodeOnLeftChild = maxNodeOnLeft.getChild(-1);
+        //System.out.println("maxnodeonleft value: " + maxNodeOnLeft.getValue());
+        //System.out.println("maxnodeonleftchild value: " + maxNodeOnLeftChild.getValue());
+        //System.out.println("maxnodeonleftparent value: " + maxNodeOnLeftParent.getValue());
+
+        //if(nodeToBeDeleted.equals(maxNodeOnLeftParent)){
+        //    maxNodeOnLeftParent = nodeToBeDeleted.getParent();
+        //}
 
         // parent en child aan elkaar plakken
-        maxNodeOnLeftParent.setRight(maxNodeOnLeftChild);
-        if(maxNodeOnLeftChild != null) {
+        if(maxNodeOnLeftParent != null) {
+            maxNodeOnLeftParent.setRight(maxNodeOnLeftChild);
+        }
+        if(maxNodeOnLeftChild != null && ! nodeToBeDeleted.equals(maxNodeOnLeftParent)) {
+            System.out.println("setparent");
             maxNodeOnLeftChild.setParent(maxNodeOnLeftParent);
         }
 
@@ -144,7 +157,11 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
             maxNodeOnLeft.setLeft(leftChild);
             leftChild.setParent(maxNodeOnLeft);
         } else {
-            maxNodeOnLeft
+            // in dit geval is de direct parent van de maxnode de deletednode
+            maxNodeOnLeft.setParent(nodeToBeDeleted.getParent());
+            if(nodeToBeDeleted.getParent() != null){
+                nodeToBeDeleted.getParent().setLeft(maxNodeOnLeft);
+            }
         }
         maxNodeOnLeft.setRight(rightChild);
         rightChild.setParent(maxNodeOnLeft);
@@ -325,16 +342,23 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
         return this;
     }
 
-    public int getDepth(){
-        if(this.parent == null){
+    public int getDepth(IBinaryNode<T> root){
+        //if(this.parent == null){
+        //    return 0;
+        //}
+        if(this.equals(root)){
             return 0;
         }
-        return parent.getDepth() + 1;
+        if(this.parent == null){
+            throw new RuntimeException("Item not in this root");
+        }
+        return parent.getDepth(root) + 1;
     }
 
     public int getDepth(T data){
+
         IBinaryNode<T> node = findNode(data);
-        return node.getDepth();
+        return node.getDepth(this);
     }
 
     @Override

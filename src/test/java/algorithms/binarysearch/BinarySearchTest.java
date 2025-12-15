@@ -670,13 +670,26 @@ public class BinarySearchTest {
         binaryNode.add(29);
         binaryNode.add(31);
 
+        //System.out.println(binaryNode.findNode(18).getParent().getValue());
+        //System.out.println(binaryNode.findNode(18).getParent().getParent().getValue());
+        //System.out.println(binaryNode.findNode(18).getParent().getParent().getParent().getValue());
+        //System.out.println(binaryNode.findNode(18).getParent().getParent().getParent().getParent().getValue());
 
         binaryNode = binaryNode.remove(24);
 
+        //System.out.println(binaryNode.find(23));
+        //System.out.println(binaryNode.getDepth(23));
+        //System.out.println(binaryNode.find(28));
+        //System.out.println(binaryNode.getDepth(28));
+        //System.out.println(binaryNode.find(20));
+        //System.out.println(binaryNode.getDepth(20));
+
         Integer expected = 3;
         Integer result = binaryNode.getDepth(18);
+
         System.out.println(binaryNode.findNode(18).getParent().getValue());
         System.out.println(binaryNode.findNode(18).getParent().getParent().getValue());
+        //System.out.println(binaryNode.findNode(18).getParent().getParent().getParent().getValue());
 
         assertEquals(expected, result);
     }

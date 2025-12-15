@@ -19,7 +19,7 @@ public interface IBinaryNode<T extends Comparable<T>> {
 
     T getValue();
 
-    int getDepth();
+    int getDepth(IBinaryNode<T> root);
     int getDepth(T data);
 
     IBinaryNode<T> getChild(int direction);
