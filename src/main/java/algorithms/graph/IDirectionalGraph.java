@@ -7,7 +7,11 @@ public interface IDirectionalGraph<T> {
     void addVertex(IDirectionalVertex<T> vertex);
     void addEdge(int fromVertexIndex, int toVertexIndex);
     void addEdge(int fromVertexIndex, int toVertexIndex, int weight);
-    int find(Predicate<IDirectionalVertex<T>> condition);
+    int findIndex(Predicate<IDirectionalVertex<T>> condition);
+    T find(Predicate<IDirectionalVertex<T>> condition);
     IDirectionalVertex<T> removeVertex(int vertexIndex);
+
+    double[] dijkstra(int originIndex);
+    double dijkstra(int originIndex, int targetIndex);
 
 }

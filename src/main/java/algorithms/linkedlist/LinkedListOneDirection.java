@@ -56,6 +56,9 @@ public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
         if(segmentBeforeIndex == null){
             return null;
         }
+        if(segmentBeforeIndex.getNextSegment() == null){
+            return null;
+        }
         return segmentBeforeIndex.getNextSegment().getData();
     }
 
