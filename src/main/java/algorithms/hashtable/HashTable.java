@@ -1,7 +1,7 @@
 package algorithms.hashtable;
 
 public class HashTable<T> implements IHashTable<T> {
-    IBucket<T>[] array;// = new IBucket<T>[];
+    IBucket<T>[] array;
 
     HashTable(){
         array = (IBucket<T>[]) new IBucket[5];
@@ -87,10 +87,7 @@ public class HashTable<T> implements IHashTable<T> {
 
     @Override
     public void store(String key, T value) {
-        //System.out.println("Store " + key + ": " + value);
-        //System.out.println(key);
         int index = hash(key);
-        //System.out.println(index);
         IBucket<T> bucket = new Bucket<T>(key, value);
         array[index] = bucket;
     }
@@ -98,8 +95,7 @@ public class HashTable<T> implements IHashTable<T> {
     @Override
     public T get(String key) {
         int index = hash(key);
-        //System.out.println(key);
-        //System.out.println(index);
+
         if(array[index] == null){
             return null;
         }

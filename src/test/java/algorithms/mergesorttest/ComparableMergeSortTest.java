@@ -1,5 +1,7 @@
 package algorithms.mergesorttest;
 
+import algorithms.insertionsort.IInsertionSort;
+import algorithms.insertionsort.InsertionSort;
 import algorithms.mergesort.ComparableMergeSort;
 import algorithms.mergesort.IComparableMergeSort;
 import org.junit.Test;
@@ -31,6 +33,17 @@ public class ComparableMergeSortTest {
     }
 
     @Test
+    public void stringTest(){
+        IComparableMergeSort<String> comparableMergeSort = new ComparableMergeSort<String>();
+        String[] unsortedArray = {"a","d","b","e","c",};
+
+
+        String[] result = comparableMergeSort.sort(unsortedArray);
+        String[] expected = {"a","b","c","d","e",};
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
     public void dubbeleWaarden(){
         IComparableMergeSort<Integer> comparableMergeSort = new ComparableMergeSort<Integer>();
         Integer[] unsortedArray = {1, 2, 1, 2, 1, 2};
@@ -42,13 +55,13 @@ public class ComparableMergeSortTest {
     }
 
     @Test
-    public void stringTest(){
-        IComparableMergeSort<String> comparableMergeSort = new ComparableMergeSort<String>();
-        String[] unsortedArray = {"a","d","b","e","c",};
+    public void nullValuesTest(){
+        IComparableMergeSort<Integer> comparableMergeSort = new ComparableMergeSort<>();
+        Integer[] unsortedArray = {null, 1, 2, null, 1, 2};
 
+        Integer[] result = comparableMergeSort.sort(unsortedArray);
+        Integer[] expected = {null, null, 1, 1, 2, 2};
 
-        String[] result = comparableMergeSort.sort(unsortedArray);
-        String[] expected = {"a","b","c","d","e",};
         assertArrayEquals(expected, result);
     }
 }

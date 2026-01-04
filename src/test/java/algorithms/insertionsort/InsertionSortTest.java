@@ -30,18 +30,6 @@ public class InsertionSortTest {
     }
 
     @Test
-    public void doublevalues(){
-        IInsertionSort<Integer> insertionSort = new InsertionSort<Integer>();
-        Integer[] unsortedArray = {1, 2, 1, 2, 1, 2};
-
-
-        insertionSort.sort(unsortedArray);
-        Integer[] expected = {1, 1, 1, 2, 2, 2};
-        Integer[] result = unsortedArray;
-        assertArrayEquals(expected, result);
-    }
-
-    @Test
     public void simpleTest3(){
         IInsertionSort<String> insertionSort = new InsertionSort<String>();
         String[] unsortedArray = {"a","d","b","e","c",};
@@ -50,6 +38,30 @@ public class InsertionSortTest {
         insertionSort.sort(unsortedArray);
         String[] expected = {"a","b","c","d","e",};
         String[] result = unsortedArray;
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void nullValuesTest(){
+        IInsertionSort<Integer> insertionSort = new InsertionSort<Integer>();
+        Integer[] unsortedArray = {null, 1, 2, null, 1, 2};
+
+
+        insertionSort.sort(unsortedArray);
+        Integer[] expected = {null, null, 1, 1, 2, 2};
+        Integer[] result = unsortedArray;
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void doubleValuesTest(){
+        IInsertionSort<Integer> insertionSort = new InsertionSort<Integer>();
+        Integer[] unsortedArray = {1, 2, 1, 2, 1, 2};
+
+
+        insertionSort.sort(unsortedArray);
+        Integer[] expected = {1, 1, 1, 2, 2, 2};
+        Integer[] result = unsortedArray;
         assertArrayEquals(expected, result);
     }
 }
