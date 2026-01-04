@@ -76,4 +76,20 @@ public class PriorityQueueTest {
         int expected = 12345;
         assertEquals(expected, result);
     }
+
+    @Test
+    public void EnqueueEquals(){
+        IPriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>();
+        for(int i = 0; i < 10; i++){
+            priorityQueue.enqueue(i, 0);
+        }
+        priorityQueue.enqueue(12345,0);
+        for(int i = 0; i < 10; i++){
+            priorityQueue.dequeue();
+        }
+
+        int result = priorityQueue.dequeue();
+        int expected = 12345;
+        assertEquals(expected, result);
+    }
 }

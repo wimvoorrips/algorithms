@@ -65,42 +65,24 @@ public class HashTable<T> implements IHashTable<T> {
             System.out.println("De hele hashmap zit vol");
             rebuildHashTable();
             return hash(key);
-            //throw new Exception("De hele hashmap zit vol");
         }
         return firstValidPosition;
 
-        /*
-        int index = startPosition;
-        int firstValidLocation = -1
-        while(array[index] != null && ! array[index].getKey().equals(key)){
-            if(array[index].getKey() == null && firstValidLocation == -1){
-                firstValidLocation = index;
-            }
-            index += 1;
-        }
-        return index;*/
     }
 
     void rebuildHashTable(){
-        //System.out.println("rebuild");
-        //System.out.println(array.length);
         IBucket<T>[] oldArray = array.clone();
         array = (IBucket<T>[]) new IBucket[oldArray.length * 2];
 
-
-        //IBucket<T>[] newArray = (IBucket<T>[]) new IBucket[oldArray.length * 2];
         for(int i = 0; i < oldArray.length; i++){
             if(oldArray[i] != null && oldArray[i].getKey() != null) {
                 String key = oldArray[i].getKey();
                 T value = oldArray[i].getData();
 
                 store(key, value);
-                //int newIndex = hash(key);
-                //IBucket<T> bucket = new Bucket<T>(key, value);
-                //array[newIndex] = bucket;
+
             }
         }
-        //array = newArray;
     }
 
     @Override

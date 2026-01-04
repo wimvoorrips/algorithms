@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LinkedListOneDirectionTest {
 
     @Test
-    public void simpleTest1(){
+    public void addGetTest1(){
         ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
         for(int i = 0; i < 10; i++){
             linkedListOneDirection.add(i);
@@ -23,7 +23,7 @@ public class LinkedListOneDirectionTest {
     }
 
     @Test
-    public void simpleTest2(){
+    public void addGetTest2(){
         ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
         for(int i = 0; i < 10; i++){
             linkedListOneDirection.add(i);
@@ -31,6 +31,48 @@ public class LinkedListOneDirectionTest {
         int result = linkedListOneDirection.get(9);
         int expected = 9;
         assertEquals(expected, result);
+    }
+
+    @Test
+    public void addRemoveTest1(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        int result = linkedListOneDirection.remove(0);
+        int expected = 0;
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void addRemoveTest2(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        linkedListOneDirection.remove(0);
+
+        int result = linkedListOneDirection.get(0);
+        int expected = 1;
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void removeNonExistingTest(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            linkedListOneDirection.remove(20);
+        });
+
+        String expectedMessage = "\"segmentBeforeIndex\" is null";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
@@ -121,7 +163,7 @@ public class LinkedListOneDirectionTest {
             linkedListOneDirection.add(i);
         }
 
-        Predicate<Integer> tostringtest = item -> (item.toString().equals("9999")); //= new String("9999");
+        Predicate<Integer> tostringtest = item -> (item.toString().equals("9999"));
         int foundLocation = linkedListOneDirection.find(tostringtest);
         int expectedLocation = 9999;
         assertEquals(expectedLocation, foundLocation);
@@ -170,7 +212,39 @@ public class LinkedListOneDirectionTest {
     }
 
     @Test
-    public void testSettingGettingTooLow(){
+    public void testSettingTooLow(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            linkedListOneDirection.set(1, -100);
+        });
+
+        String expectedMessage = "\"segmentBeforeIndex\" is null";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testSettingTooHigh(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            linkedListOneDirection.set(1, 100000);
+        });
+
+        String expectedMessage = "\"segmentBeforeIndex\" is null";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void testGettingTooLow(){
         ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
         for(int i = 0; i < 10000; i++){
             linkedListOneDirection.add(i);
@@ -182,7 +256,7 @@ public class LinkedListOneDirectionTest {
     }
 
     @Test
-    public void testSettingGettingTooHigh(){
+    public void testGettingTooHigh(){
         ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
         for(int i = 0; i < 10000; i++){
             linkedListOneDirection.add(i);
@@ -234,6 +308,34 @@ public class LinkedListOneDirectionTest {
 
         int foundData = linkedListOneDirection.getLength();
         int expectedData = 10000;
+        assertEquals(expectedData, foundData);
+    }
+
+    @Test
+    public void addOnIndexTest1(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        linkedListOneDirection.add(10, 5000);
+
+        int foundData = linkedListOneDirection.get(5000);
+        int expectedData = 10;
+        assertEquals(expectedData, foundData);
+    }
+
+    @Test
+    public void addOnIndexTest2(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 10000; i++){
+            linkedListOneDirection.add(i);
+        }
+
+        linkedListOneDirection.add(10, 5000);
+
+        int foundData = linkedListOneDirection.get(5001);
+        int expectedData = 5000;
         assertEquals(expectedData, foundData);
     }
 }

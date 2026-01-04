@@ -2,8 +2,6 @@ package algorithms.mergesorttest;
 
 import algorithms.mergesort.ComparableMergeSort;
 import algorithms.mergesort.IComparableMergeSort;
-import algorithms.mergesort.IMergeSort;
-import algorithms.mergesort.MergeSort;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;

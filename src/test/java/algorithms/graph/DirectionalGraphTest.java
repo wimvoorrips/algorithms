@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import java.util.function.Predicate;
 
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DirectionalGraphTest {
@@ -75,13 +77,14 @@ public class DirectionalGraphTest {
         directionalGraph.addVertex(3);
 
         directionalGraph.addEdge(0, 1, 15);
-        directionalGraph.addEdge(1, 3, 10);
 
-        Predicate<IDirectionalVertex<Integer>> condition = target -> (target.getEdges().get(0).getWeight() == 10);
+        Exception exception = assertThrows(RuntimeException.class, () -> {
+            directionalGraph.addEdge(1, 3, 10);
+        });
 
-        int result = directionalGraph.findIndex(condition);
-        int expected = 1;
-        assertEquals(expected, result);
+        String expectedMessage = "vertex does not exist at this index";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
