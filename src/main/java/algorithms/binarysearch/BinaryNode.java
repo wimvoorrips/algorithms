@@ -132,7 +132,6 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
 
         // situation 3, node to be deleted has 2 children
 
-        // fuck it, even alles apart schrijven
         // case 1: deletedNode is NIET root en is NIET de parent van de max node
         IBinaryNode<T> maxNodeOnLeft = leftChild.findMaxNode();
         IBinaryNode<T> maxNodeOnLeftParent = maxNodeOnLeft.getParent();
