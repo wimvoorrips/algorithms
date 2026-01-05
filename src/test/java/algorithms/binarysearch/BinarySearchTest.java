@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 public class BinarySearchTest {
 
     @Test
-    public void simpleTest1(){
+    public void addFindTest1(){
         IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
         binaryNode.add(1);
 
@@ -20,7 +20,7 @@ public class BinarySearchTest {
     }
 
     @Test
-    public void simpleTest2(){
+    public void addFindTest2(){
         IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
         binaryNode.add(1);
         binaryNode.add(2);
@@ -33,7 +33,21 @@ public class BinarySearchTest {
     }
 
     @Test
-    public void emptyFindTest(){
+    public void addNodeFindTest2(){
+        IBinaryNode<Integer> binaryNode1 = new BinaryNode<Integer>();
+        binaryNode1.add(1);
+        IBinaryNode<Integer> binaryNode2 = new BinaryNode<Integer>();
+        binaryNode2.add(2);
+        binaryNode1.add(binaryNode2);
+
+        int expected = 2;
+        int result = binaryNode1.find(2);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void emptyTreeFindTest(){
         IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
 
         Integer expected = null;

@@ -43,7 +43,7 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
     }
 
     public IBinaryNode<T> add(IBinaryNode<T> newNode){
-        if(newNode == null){
+        if(newNode == null || newNode.getValue() == null){
             return this;
         }
 
@@ -51,14 +51,16 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
             if(left == null){
                 left = newNode;
                 left.setParent(this);
+            } else {
+                left.add(newNode);
             }
-            left.add(newNode);
         } else {
             if(right == null){
                 right = newNode;
                 right.setParent(this);
+            } else {
+                right.add(newNode);
             }
-            right.add(newNode);
         }
         return this;
     }
