@@ -60,6 +60,17 @@ public class LinkedListOneDirectionTest {
     }
 
     @Test
+    public void removeFromEmptyTest(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+
+        linkedListOneDirection.remove(0);
+
+        Integer result = linkedListOneDirection.get(0);
+        Integer expected = null;
+        assertEquals(expected, result);
+    }
+
+    @Test
     public void removeNonExistingTest(){
         ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
         for(int i = 0; i < 10; i++){
@@ -336,6 +347,30 @@ public class LinkedListOneDirectionTest {
 
         int foundData = linkedListOneDirection.get(5001);
         int expectedData = 5000;
+        assertEquals(expectedData, foundData);
+    }
+
+    @Test
+    public void performanceTestFast(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 100000; i++){
+            linkedListOneDirection.add(i, 0);
+        }
+
+        int foundData = linkedListOneDirection.get(0);
+        int expectedData = 99999;
+        assertEquals(expectedData, foundData);
+    }
+
+    @Test
+    public void performanceTestSlow(){
+        ILinkedListOneDirection<Integer> linkedListOneDirection = new LinkedListOneDirection<Integer>();
+        for(int i = 0; i < 100000; i++){
+            linkedListOneDirection.add(i, i);
+        }
+
+        int foundData = linkedListOneDirection.get(0);
+        int expectedData = 0;
         assertEquals(expectedData, foundData);
     }
 }

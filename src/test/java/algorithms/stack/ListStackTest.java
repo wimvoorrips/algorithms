@@ -35,20 +35,25 @@ public class ListStackTest {
     }
 
     @Test
-    public void PopMoreThanExists(){
+    public void popEmptyTest(){
         IStack<Integer> listStack = new ListStack<Integer>();
-        for(int i = 0; i < 10000; i++){
+        Integer result = listStack.pop();
+        Integer expected = null;
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void performanceTestAll(){
+        IStack<Integer> listStack = new ListStack<Integer>();
+        for(int i = 0; i < 100000; i++){
             listStack.push(i);
         }
-
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            for(int i = 0; i < 100000; i++){
-                listStack.pop();
-            }
-        });
-
-        String expectedMessage = "\"segmentToBeRemoved\" is null";
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expectedMessage));
+        for(int i = 0; i < 100000; i++){
+            listStack.pop();
+        }
+        Integer result = listStack.pop();
+        Integer expected = null;
+        assertEquals(expected, result);
     }
+
 }

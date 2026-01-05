@@ -71,6 +71,11 @@ public class LinkedListOneDirection <T> implements ILinkedListOneDirection <T> {
     public T remove(int index) {
         ISegmentOneDirection<T> segmentBeforeIndex = getPreviousSegment(index);
         ISegmentOneDirection<T> segmentToBeRemoved = segmentBeforeIndex.getNextSegment();
+
+        if(segmentToBeRemoved == null){
+            return null;
+        }
+
         ISegmentOneDirection<T> segmentAfterIndex = segmentToBeRemoved.getNextSegment();
 
         segmentBeforeIndex.setNextSegment(segmentAfterIndex);

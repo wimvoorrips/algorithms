@@ -33,7 +33,45 @@ public class BinarySearchTest {
     }
 
     @Test
-    public void addNodeFindTest2(){
+    public void addFindTest3(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        for(int i = 0; i < 10; i++){
+            binaryNode.add(i);
+        }
+
+        int expected = 9;
+        int result = binaryNode.find(9);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void addFindTest4(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        for(int i = 0; i < 10; i++){
+            binaryNode.add(i);
+        }
+
+        int expected = 5;
+        int result = binaryNode.find(5);
+
+        assertEquals(expected, result);
+    }
+
+
+    @Test
+    public void addFind0Test(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        binaryNode.add(0);
+
+        int expected = 0;
+        int result = binaryNode.find(0);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void addNodeFindTest1(){
         IBinaryNode<Integer> binaryNode1 = new BinaryNode<Integer>();
         binaryNode1.add(1);
         IBinaryNode<Integer> binaryNode2 = new BinaryNode<Integer>();
@@ -710,6 +748,32 @@ public class BinarySearchTest {
 
         System.out.println(binaryNode.findNode(18).getParent().getValue());
         System.out.println(binaryNode.findNode(18).getParent().getParent().getValue());
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void performanceTestFast(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        for(int i = 0; i < 10000; i++){
+            binaryNode.add((Integer) i);
+        }
+
+        int expected = 0;
+        int result = binaryNode.find(0);
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void performanceTestSlow(){
+        IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
+        for(int i = 0; i < 10000; i++){
+            binaryNode.add((Integer) i);
+        }
+
+        Integer expected = 9999;
+        Integer result = binaryNode.find(9999);
 
         assertEquals(expected, result);
     }

@@ -7,6 +7,7 @@ import algorithms.mergesort.IComparableMergeSort;
 import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ComparableMergeSortTest {
 
@@ -63,5 +64,32 @@ public class ComparableMergeSortTest {
         Integer[] expected = {null, null, 1, 1, 2, 2};
 
         assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void performanceTestSorted(){
+        IComparableMergeSort<Integer> comparableMergeSort = new ComparableMergeSort<>();
+        Integer[] unsortedArray = new Integer[1000000];
+        for(int i = 0; i < unsortedArray.length; i++){
+            unsortedArray[i] = i;
+        }
+
+
+        Integer[] result = comparableMergeSort.sort(unsortedArray);
+        Integer[] expected = unsortedArray;
+        assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void performanceTestUnsorted(){
+        IComparableMergeSort<Integer> comparableMergeSort = new ComparableMergeSort<>();
+        Integer[] unsortedArray = new Integer[1000000];
+        for(int i = 0; i < unsortedArray.length; i++){
+            unsortedArray[i] = -i;
+        }
+
+        Integer result = comparableMergeSort.sort(unsortedArray)[0];
+        Integer expected = -999999;
+        assertEquals(expected, result);
     }
 }

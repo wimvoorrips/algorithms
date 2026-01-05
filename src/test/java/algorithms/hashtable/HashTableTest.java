@@ -141,7 +141,7 @@ public class HashTableTest {
         HashTable<Integer> hashTable = new HashTable<>();
         hashTable.store("A", 1); //101 modulo 5 = 1
         hashTable.store("F", 2); //106 modulo 5 = 1
-        hashTable.store("I", 3); //106 modulo 5 = 1
+        hashTable.store("I", 3); //111 modulo 5 = 1
         hashTable.removeKey("A");
         Integer expected = 2;
         Integer result = hashTable.get("F");
@@ -154,7 +154,7 @@ public class HashTableTest {
         HashTable<Integer> hashTable = new HashTable<>();
         hashTable.store("A", 1); //101 modulo 5 = 1
         hashTable.store("F", 2); //106 modulo 5 = 1
-        hashTable.store("I", 3); //106 modulo 5 = 1
+        hashTable.store("I", 3); //111 modulo 5 = 1
         hashTable.removeKey("A");
         hashTable.removeKey("F");
         hashTable.store("F", 2); //106 modulo 5 = 1

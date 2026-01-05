@@ -92,4 +92,29 @@ public class PriorityQueueTest {
         int expected = 12345;
         assertEquals(expected, result);
     }
+
+
+    @Test
+    public void performanceTestFast(){
+        IPriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>();
+        for(int i = 0; i < 10000; i++){
+            priorityQueue.enqueue(i, i);
+        }
+        priorityQueue.getFirst();
+        int result = priorityQueue.getFirst();
+        int expected = 0;
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void performanceTestSlow(){
+        IPriorityQueue<Integer> priorityQueue = new PriorityQueue<Integer>();
+        for(int i = 0; i < 100000; i++){
+            priorityQueue.enqueue(i, -i);
+        }
+        priorityQueue.getFirst();
+        int result = priorityQueue.getFirst();
+        int expected = 99999;
+        assertEquals(expected, result);
+    }
 }

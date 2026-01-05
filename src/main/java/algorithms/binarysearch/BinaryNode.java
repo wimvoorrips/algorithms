@@ -205,7 +205,7 @@ public class BinaryNode<T extends Comparable<T>> implements IBinaryNode<T> {
             return null;
         }
 
-        if(value == data){
+        if(value.equals(data)){
             return value;
         };
 
