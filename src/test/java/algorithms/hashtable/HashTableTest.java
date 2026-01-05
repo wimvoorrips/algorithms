@@ -1,7 +1,7 @@
 package algorithms.hashtable;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 
 public class HashTableTest {
@@ -160,6 +160,31 @@ public class HashTableTest {
         hashTable.store("F", 2); //106 modulo 5 = 1
         Integer expected = 2;
         Integer result = hashTable.get("F");
+
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void nullKeyTest(){
+        HashTable<Integer> hashTable = new HashTable<>();
+
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            hashTable.store(null, 1); //101 modulo 5 = 1
+        });
+
+        String expectedMessage = "\"key\" is null";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    public void nullDataTest(){
+        HashTable<Integer> hashTable = new HashTable<>();
+
+        hashTable.store("A", null); //101 modulo 5 = 1
+
+        Integer expected = null;
+        Integer result = hashTable.get("A");
 
         assertEquals(expected, result);
     }
