@@ -126,6 +126,22 @@ public class BinarySearchTest {
     }
 
     @Test
+    public void RemoveNodeByNodeLeafTest1(){
+        IBinaryNode<Integer> binaryNode1 = new BinaryNode<Integer>();
+        binaryNode1.add(1);
+        IBinaryNode<Integer> binaryNode2 = new BinaryNode<Integer>();
+        binaryNode2.add(2);
+        binaryNode1.add(binaryNode2);
+
+        IBinaryNode<Integer> deletedNode = binaryNode1.remove(binaryNode2);
+
+        IBinaryNode<Integer> expected = binaryNode2;
+        IBinaryNode<Integer> result = deletedNode;
+
+        assertEquals(expected, result);
+    }
+
+    @Test
     public void RemoveNodeSoleRootTest1(){
         IBinaryNode<Integer> binaryNode = new BinaryNode<Integer>();
         binaryNode.add(10);
