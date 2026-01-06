@@ -193,4 +193,37 @@ public class DirectionalGraphTest {
         double expected = 5;
         assertEquals(expected, result);
     }
+
+    @Test
+    public void dijkstraDisconnectedTest1(){
+        IDirectionalGraph<Integer> directionalGraph = new DirectionalGraph<>();
+        directionalGraph.addVertex(0);
+        directionalGraph.addVertex(1);
+        directionalGraph.addVertex(2);
+        directionalGraph.addVertex(3);
+
+        directionalGraph.addEdge(0, 1, 1);
+        directionalGraph.addEdge(1, 2, 1);
+        directionalGraph.addEdge(3, 2, 1);
+
+        double result = directionalGraph.dijkstra(0,2);
+        double expected = 2;
+        assertEquals(expected, result);
+    }
+
+    @Test
+    public void dijkstraDisconnectedTest2(){
+        IDirectionalGraph<Integer> directionalGraph = new DirectionalGraph<>();
+        directionalGraph.addVertex(0);
+        directionalGraph.addVertex(1);
+        directionalGraph.addVertex(2);
+        directionalGraph.addVertex(3);
+
+        directionalGraph.addEdge(0, 1, 1);
+        directionalGraph.addEdge(1, 2, 1);
+
+        double result = directionalGraph.dijkstra(0,2);
+        double expected = 2;
+        assertEquals(expected, result);
+    }
 }
